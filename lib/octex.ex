@@ -1,6 +1,12 @@
 defmodule Octex do
-  
+  use Application 
+  alias Octex.Supervisor
+
   @base_url "https://api.github.com"
+
+  def start(_type, _args) do
+    Supervisor.start_link
+  end
 
   def random_snippet(lang \\ "elixir") do
     random_repo(lang) 

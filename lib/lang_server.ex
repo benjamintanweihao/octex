@@ -14,7 +14,7 @@ defmodule Octex.LangServer do
 
   defp load_languages do
     path = Path.expand(__DIR__)
-    {:ok, file} = File.read("#{path}/config/languages.json")
+    {:ok, file} = File.read("#{path}/../config/languages.json")
     {:ok, json} = file |> Poison.decode
     json
   end

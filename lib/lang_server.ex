@@ -5,7 +5,7 @@ defmodule Octex.LangServer do
   end
 
   def get_languages do
-    Agent.get(__MODULE__, fn langs -> langs |> Map.keys end)
+    Agent.get(__MODULE__, fn langs -> langs end)
   end
 
   def get_language(lang) do

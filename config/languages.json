@@ -1,107 +1,117 @@
-{
-  "ActionScript":{
+[
+  {
+    "name": "ActionScript",
     "color":"#882B0F",
     "extensions":[
       ".as"
     ]
   },
-  "Brainfuck":{
+  {
+    "name": "Brainfuck",
     "color":"#2F2530",
     "extensions":[
       ".b",
       ".bf"
     ]
   },
-  "CoffeeScript":{
+  {
+    "name": "CoffeeScript",
     "color":"#244776",
     "extensions":[
       ".coffee"
     ]
   },
-  "Dart":{
+  {  
+    "name": "Dart",
     "color":"#00B4AB",
     "extensions":[
       ".dart"
     ]
   },
-  "Elixir":{
+  {
+    "name": "Elixir",
     "color":"#6e4a7e",
     "extensions":[
       ".ex"
     ]
   },
-  "Elm":{
+  {
+    "name": "Elm",
     "color":"#60B5CC",
     "extensions":[
       ".elm"
     ]
   },
-  "Erlang":{
+  {
+    "name": "Erlang",
     "type":"programming",
     "color":"#B83998",
     "extensions":[
       ".erl"
     ]
   },
-  "F#":{
+  {
+    "name": "F#",
     "color":"#b845fc",
     "extensions":[
       ".fs"
     ]
   },
-  "Go":{
+  {
+    "name": "Go",
     "color":"#375eab",
     "extensions":[
       ".go"
     ]
   },
-  "Haskell":{
+  {
+    "name": "Haskell",
     "color":"#29b544",
     "extensions":[
       ".hs"
     ]
   },
-  "Io":{
+  {
+    "name": "Io",
     "color":"#a9188d",
     "extensions":[
       ".io"
     ]
   },
-  "LFE":{
+  {
+    "name": "LFE",
     "color":"#004200",
     "extensions":[
       ".lfe"
     ]
   },
-  "OCaml":{
+  {
+    "name": "OCaml",
     "color":"#3be133",
     "extensions":[
       ".ml"
     ]
   },
-  "Prolog":{
+  {
+    "name": "Prolog",
     "color":"#74283c",
     "extensions":[
       ".pl"
     ]
   },
-  "Racket":{
-    "color":"#22228f",
-    "extensions":[
-      ".rkt"
-    ]
-  },
-  "Ruby":{
+  {
+    "name": "Ruby",
     "color":"#701516",
     "extensions":[
       ".rb"
     ]
   },
-  "Rust":{
+  {
+    "name": "Rust",
     "color":"#dea584",
     "extensions":[
       ".rs"
     ]
   }
-}
+]
 

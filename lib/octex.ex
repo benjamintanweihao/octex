@@ -1,11 +1,16 @@
 defmodule Octex do
   use Application 
   alias Octex.Supervisor
+  alias Octex.LangServer
 
   @base_url "https://api.github.com"
 
   def start(_type, _args) do
     Supervisor.start_link
+  end
+
+  def get_supported_languages do
+    LangServer.get_languages
   end
 
   def random_snippet(lang \\ "elixir") do

@@ -6,6 +6,7 @@ defmodule Octex do
   @base_url "https://api.github.com"
 
   def start(_type, _args) do
+    :random.seed(:os.timestamp)
     Supervisor.start_link
   end
 

@@ -1,12 +1,5 @@
 [
   {
-    "name": "ActionScript",
-    "color":"#882B0F",
-    "extensions":[
-      ".as"
-    ]
-  },
-  {
     "name": "Brainfuck",
     "color":"#2F2530",
     "extensions":[
@@ -19,13 +12,6 @@
     "color":"#244776",
     "extensions":[
       ".coffee"
-    ]
-  },
-  {  
-    "name": "Dart",
-    "color":"#00B4AB",
-    "extensions":[
-      ".dart"
     ]
   },
   {
@@ -51,24 +37,10 @@
     ]
   },
   {
-    "name": "F#",
-    "color":"#b845fc",
-    "extensions":[
-      ".fs"
-    ]
-  },
-  {
     "name": "Go",
     "color":"#375eab",
     "extensions":[
       ".go"
-    ]
-  },
-  {
-    "name": "Haskell",
-    "color":"#29b544",
-    "extensions":[
-      ".hs"
     ]
   },
   {
@@ -79,13 +51,6 @@
     ]
   },
   {
-    "name": "LFE",
-    "color":"#004200",
-    "extensions":[
-      ".lfe"
-    ]
-  },
-  {
     "name": "OCaml",
     "color":"#3be133",
     "extensions":[
@@ -93,24 +58,10 @@
     ]
   },
   {
-    "name": "Prolog",
-    "color":"#74283c",
-    "extensions":[
-      ".pl"
-    ]
-  },
-  {
     "name": "Ruby",
     "color":"#701516",
     "extensions":[
       ".rb"
-    ]
-  },
-  {
-    "name": "Rust",
-    "color":"#dea584",
-    "extensions":[
-      ".rs"
     ]
   }
 ]

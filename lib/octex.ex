@@ -6,7 +6,6 @@ defmodule Octex do
   @base_url "https://api.github.com"
 
   def start(_type, _args) do
-    :random.seed(:os.timestamp)
     Supervisor.start_link
   end
 
@@ -14,7 +13,8 @@ defmodule Octex do
     LangServer.get_languages
   end
 
-  def random_snippet(lang \\ "elixir") do
+  def random_snippet(lang) do
+    :random.seed(:os.timestamp)
     random_repo(lang) 
     |> random_file_url_in_repo(lang)
     |> download_file

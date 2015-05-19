@@ -13,10 +13,80 @@ defmodule Octex.LangServer do
   end
 
   defp load_languages do
-    path = Path.expand(__DIR__)
-    {:ok, file} = File.read("#{path}/../config/languages.json")
-    {:ok, json} = file |> Poison.decode
+    {:ok, json} = languages_json |> Poison.decode
     json
+  end
+  
+  defp languages_json do
+    ~s(
+      [
+        {
+          "name": "Brainfuck",
+          "color":"#2F2530",
+          "extensions":[
+            ".b",
+            ".bf"
+          ]
+        },
+        {
+          "name": "CoffeeScript",
+          "color":"#244776",
+          "extensions":[
+            ".coffee"
+          ]
+        },
+        {
+          "name": "Elixir",
+          "color":"#6e4a7e",
+          "extensions":[
+            ".ex"
+          ]
+        },
+        {
+          "name": "Elm",
+          "color":"#60B5CC",
+          "extensions":[
+            ".elm"
+          ]
+        },
+        {
+          "name": "Erlang",
+          "type":"programming",
+          "color":"#B83998",
+          "extensions":[
+            ".erl"
+          ]
+        },
+        {
+          "name": "Go",
+          "color":"#375eab",
+          "extensions":[
+            ".go"
+          ]
+        },
+        {
+          "name": "Io",
+          "color":"#a9188d",
+          "extensions":[
+            ".io"
+          ]
+        },
+        {
+          "name": "OCaml",
+          "color":"#3be133",
+          "extensions":[
+            ".ml"
+          ]
+        },
+        {
+          "name": "Ruby",
+          "color":"#701516",
+          "extensions":[
+            ".rb"
+          ]
+        }
+      ]
+    )
   end
 
 end

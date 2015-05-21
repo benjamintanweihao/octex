@@ -1,5 +1,5 @@
 defmodule Octex do
-  use Application 
+  use Application
   alias Octex.Supervisor
   alias Octex.LangServer
 
@@ -9,51 +9,101 @@ defmodule Octex do
     Supervisor.start_link
   end
 
-  def get_supported_languages do
+  def languages do
     LangServer.get_languages
   end
 
-  def random_snippet(lang) do
+  def fetch_snippet(lang) do
     :random.seed(:os.timestamp)
-    random_repo(lang) 
-    |> random_file_url_in_repo(lang)
-    |> download_file
+    {:ok, repo}     = fetch_repo(lang)
+    {:ok, file_url} = fetch_file_url(repo, lang)
+    {:ok, contents} = fetch_file(file_url)
+    contents
   end
 
-  defp random_repo(lang) do
-    url = random_repo_url(lang)
-    {:ok, %{body: body}} = url |> HTTPoison.get
-    {:ok, %{"items" => items}} = body |> Poison.decode
+  def fetch_repo(lang) do
+    res = repo_url(lang)
+            |> HTTPoison.get
+            |> handle_http_response
+            |> handle_json_response
 
-    items 
-    |> Enum.map(fn i -> i["full_name"] end)
-    |> Enum.shuffle
-    |> Enum.at(0)
+    case res do
+      {:ok, repos} ->
+        repo = repos
+                 |> Enum.shuffle
+                 |> Enum.at(0)
+
+        {:ok, repo}
+
+      _ ->
+        :error
+    end
   end
 
-  defp random_file_url_in_repo(repo, lang) do
-    url = random_file_url_in_repo_url(repo, lang)
-    {:ok, %{body: body}} = url |> HTTPoison.get
-    {:ok, %{"items" => items}} = body |> Poison.decode
+  defp fetch_file_url(repo, lang) do
+    res = files_url(repo, lang)
+            |> HTTPoison.get
+            |> handle_http_response
 
-    %{"url" => url} = items 
-                      |> Enum.shuffle 
-                      |> Enum.at(0)
-    url
+    case res do
+      {:ok, %{"items" => items}} ->
+        url = items
+                |> Enum.map(&(&1["url"]))
+                |> Enum.shuffle
+                |> Enum.at(0)
+
+        case url do
+          nil -> :error
+          _   -> {:ok, url}
+        end
+
+      _ ->
+        :error
+    end
   end
 
-  defp download_file(url) do
-    {:ok, %{body: body}} = url |> HTTPoison.get
-    {:ok, %{"download_url" => download_url}} = body |> Poison.decode
-    {:ok, %{body: file}} = download_url |> HTTPoison.get
-    file
+  defp fetch_file(url) do
+    res = url
+            |> HTTPoison.get
+            |> handle_http_response
+            |> handle_json_response
+
+    case res do
+      {:ok, url} ->
+        {:ok, %{body: body}} = url |> HTTPoison.get
+        {:ok, body}
+
+      _ ->
+        :error
+    end
   end
 
-  defp random_repo_url(lang) do
+  defp handle_http_response({:ok, %HTTPoison.Response{status_code: 200, body: body}}) do
+    Poison.decode(body)
+  end
+
+  defp handle_http_response(_) do
+    :error
+  end
+
+  defp handle_json_response({:ok, %{"items" => items}}) do
+    res = items |> Enum.map(&(&1["full_name"]))
+    {:ok, res}
+  end
+
+  defp handle_json_response({:ok, %{"download_url" => download_url}}) do
+    {:ok, download_url}
+  end
+
+  defp handle_json_response(_) do
+    :error
+  end
+
+  defp repo_url(lang) do
     "#{@base_url}/search/repositories?q=+language:#{lang}&sort=stars&order=desc"
   end
 
-  defp random_file_url_in_repo_url(repo, lang) do
+  defp files_url(repo, lang) do
     "#{@base_url}/search/code?q=+in:file+language:#{lang}+repo:#{repo}+NOT+test+NOT+unit+NOT+spec+in:path+size:500..1000"
   end
 

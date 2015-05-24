@@ -9,19 +9,34 @@ defmodule Octex do
     Supervisor.start_link
   end
 
-  def languages do
+  def fetch_languages do
     LangServer.get_languages
   end
 
-  def fetch_snippet(lang) do
+  def fetch_code(lang) do
     :random.seed(:os.timestamp)
-    {:ok, repo}     = fetch_repo(lang)
-    {:ok, file_url} = fetch_file_url(repo, lang)
-    {:ok, contents} = fetch_file(file_url)
-    contents
+
+    case fetch_repo(lang) do
+      {:ok, repo} ->
+        case fetch_file_url(repo, lang) do
+          {:ok, file_url} ->
+            case fetch_file(file_url) do
+              {:ok, file} ->
+                {:ok, file}
+
+              :error ->
+                {:error, "Error fetching file"}
+            end
+
+            _ -> {:error, "Error fetching file url"}
+        end
+      
+      :error ->
+        {:error, "Error fetching repo"}
+    end
   end
 
-  def fetch_repo(lang) do
+  defp fetch_repo(lang) do
     res = repo_url(lang)
             |> HTTPoison.get
             |> handle_http_response

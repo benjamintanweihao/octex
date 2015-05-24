@@ -4,6 +4,7 @@ defmodule Octex do
   alias Octex.LangServer
 
   @base_url "https://api.github.com"
+  # @access_token "access-token-goes-here"
 
   def start(_type, _args) do
     Supervisor.start_link
@@ -28,7 +29,8 @@ defmodule Octex do
                 {:error, "Error fetching file"}
             end
 
-            _ -> {:error, "Error fetching file url"}
+          _ -> 
+            {:error, "Error fetching file url"}
         end
       
       :error ->
@@ -115,11 +117,13 @@ defmodule Octex do
   end
 
   defp repo_url(lang) do
+    # "#{@base_url}/search/repositories?access_token=#{@access_token}&q=+language:#{lang}&sort=stars&order=desc"
     "#{@base_url}/search/repositories?q=+language:#{lang}&sort=stars&order=desc"
   end
 
   defp files_url(repo, lang) do
-    "#{@base_url}/search/code?q=+in:file+language:#{lang}+repo:#{repo}+NOT+test+NOT+unit+NOT+spec+in:path+size:500..1000"
+    # "#{@base_url}/search/code?access_token=#{@access_token}&q=+in:file+language:#{lang}+repo:#{repo}+NOT+\"test\"+NOT+\"unit\"+NOT+\"spec\"+in:path+size:400..1100"
+    "#{@base_url}/search/code?q=+in:file+language:#{lang}+repo:#{repo}+NOT+\"test\"+NOT+\"unit\"+NOT+\"spec\"+in:path+size:400..1100"
   end
 
 end

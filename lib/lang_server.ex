@@ -21,32 +21,10 @@ defmodule Octex.LangServer do
     ~s(
       [
         {
-          "name": "Brainfuck",
-          "color":"#2F2530",
-          "extensions":[
-            ".b",
-            ".bf"
-          ]
-        },
-        {
-          "name": "CoffeeScript",
-          "color":"#244776",
-          "extensions":[
-            ".coffee"
-          ]
-        },
-        {
           "name": "Elixir",
           "color":"#6e4a7e",
           "extensions":[
             ".ex"
-          ]
-        },
-        {
-          "name": "Elm",
-          "color":"#60B5CC",
-          "extensions":[
-            ".elm"
           ]
         },
         {
@@ -62,13 +40,6 @@ defmodule Octex.LangServer do
           "color":"#375eab",
           "extensions":[
             ".go"
-          ]
-        },
-        {
-          "name": "Io",
-          "color":"#a9188d",
-          "extensions":[
-            ".io"
           ]
         },
         {
